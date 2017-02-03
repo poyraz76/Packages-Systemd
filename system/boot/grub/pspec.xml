@@ -1,0 +1,86 @@
+<?xml version="1.0" ?>
+<!DOCTYPE PISI SYSTEM "http://www.limelinux.com/standard/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>grub2</Name>
+        <Homepage>http://www.gnu.org/software/grub/</Homepage>
+        <Packager>
+            <Name>Lime Linux</Name>
+            <Email>admin@limelinux.com</Email>
+        </Packager>
+        <Summary>GRUB Boot Loader</Summary>
+        <Description>GRUB Boot Loader</Description>
+        <License>GPLv3+</License>
+        <Archive sha1sum="1bf580f1e8bce4909a7ac7ca485cee02b00ed383" type="tarxz">http://alpha.gnu.org/gnu/grub/grub-2.02~beta2.tar.xz</Archive>
+        <Patches>            
+            <Patch level="1">LimeLinux.patch</Patch>
+            <Patch level="1">security/cve-2015-8370.patch</Patch>
+        </Patches>
+        
+        <BuildDependencies>
+            <Dependency>binutils</Dependency>
+            <Dependency>bison</Dependency>
+            <Dependency>flex</Dependency>
+            <Dependency>gcc</Dependency>
+            <Dependency>help2man</Dependency>
+            <Dependency>texinfo</Dependency>
+            <Dependency>freetype</Dependency>
+            <Dependency>zlib</Dependency>
+            <Dependency>ncurses</Dependency>
+            <Dependency>xz</Dependency>
+            <Dependency>fuse</Dependency>
+            <Dependency>lvm2</Dependency>
+            <Dependency>gettext</Dependency>
+        </BuildDependencies>
+    </Source>
+
+    <Package>
+        <Name>grub2</Name>
+        <RuntimeDependencies>
+            <Dependency>freetype</Dependency>
+            <Dependency>xz</Dependency>
+            <Dependency>fuse</Dependency>
+            <Dependency>lvm2</Dependency>
+            <Dependency>mtools</Dependency>
+            <Dependency>os-prober</Dependency>
+        </RuntimeDependencies>
+        <Files>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="executable">/usr/sbin</Path>
+            <Path fileType="library">/usr/lib/grub</Path>
+            <Path fileType="data">/usr/share/grub</Path>
+            <Path fileType="data">/usr/share/backgrounds</Path>
+            <Path fileType="localedata">/usr/share/locale</Path>
+            <Path fileType="info">/usr/share/info</Path>
+            <Path fileType="data">/etc/grub.d</Path>
+            <Path fileType="data">/etc/bash_completion.d</Path>
+
+            <Path fileType="data">/etc/default/grub</Path>
+        </Files>
+        <AdditionalFiles>
+            <AdditionalFile permission="0755" target="/usr/sbin/update-grub">update-grub</AdditionalFile>
+            <AdditionalFile permission="0755" target="/usr/sbin/update-grub2">update-grub2</AdditionalFile>
+
+            
+            <AdditionalFile permission="0644" target="/etc/default/grub">conf/grub</AdditionalFile>
+            <AdditionalFile permission="0644" target="/usr/share/grub/unicode.pf2">unicode.pf2</AdditionalFile>
+            <AdditionalFile permission="0644" target="/usr/share/backgrounds/splash.tga">splash.tga</AdditionalFile>
+        </AdditionalFiles>
+        <RuntimeDependencies>
+            <Dependency>os-prober</Dependency>
+        </RuntimeDependencies>
+    </Package>
+
+    <History>
+        
+        <Update release="1">
+            <Date>2017-02-05</Date>
+            <Version>2.02</Version>
+            <Comment>repositories</Comment>
+            <Name>Lime Linux</Name>
+            <Email>admin@limelinux.com</Email>
+        </Update>
+    </History>
+    
+</PISI>
+

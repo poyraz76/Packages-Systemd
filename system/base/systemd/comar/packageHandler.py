@@ -26,7 +26,7 @@ def migrate_locale():
             filedata.write("LANG=%s\n" % lang)
 
 def migrate_vconsole_conf():
-    old_location = "/etc/mudur/keymap"
+    old_location = "/etc/keymaps"
     new_location = "/etc/vconsole.conf"
 
     if not os.path.exists(new_location) \
@@ -54,10 +54,11 @@ def migrate_modules_autoload_d():
 
 def postInstall(fromVersion, fromRelease, toVersion, toRelease):
     # Generate machine-id
-    os.system("/bin/systemd-machine-id-setup &> /dev/null")
+    os.system("/usr/bin/systemd-machine-id-setup &> /dev/null")
 
     # Re-execute daemon
-    os.system("/bin/systemctl daemon-reexec &> /dev/null")
+    os.system("/usr/bin/systemctl daemon-reexec &> /dev/null")
+    os.system("/usr/bin/localectl &> /dev/null")
 
     # Make sure pam_systemd is enabled
 

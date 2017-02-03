@@ -23,7 +23,7 @@ def postInstall(fromVersion, fromRelease, toVersion, toRelease):
         os.symlink(target, "/etc/systemd/system/default.target")
 
     # Enable the services installed by default
-    os.system("/bin/systemctl enable \
+    os.system("/usr/bin/systemctl enable \
                 getty@.service \
                 remote-fs.target \
                 systemd-readahead-replay.service \

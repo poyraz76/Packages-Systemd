@@ -1,0 +1,56 @@
+<?xml version="1.0" ?> 
+<!DOCTYPE PISI SYSTEM "http://www.limelinux.com/standard/pisi-spec.dtd">
+<PISI>
+    <Source>
+        <Name>dracut</Name>
+        <Homepage>http://dracut.wiki.kernel.org/index.php/Main_Page</Homepage>
+        <Packager>
+            <Name>LimeLinux</Name>
+            <Email>admin@limelinux.com</Email>
+        </Packager>
+        <Summary>initramfs system</Summary>
+        <Description>dracut is an event driven initramfs infrastructure. dracut (the tool) is used to create an initramfs image by copying tools and files from an installed system and combining it with the dracut framework</Description>
+        <License>GPLv3+</License>
+        <Archive sha1sum="e2ef763d25927f2dec8834bb2ee8b34a0fa14ffd" type="tarxz">https://www.kernel.org/pub/linux/utils/boot/dracut/dracut-044.tar.xz</Archive>
+        
+        <BuildDependencies>
+            <Dependency>dash</Dependency>
+        </BuildDependencies>
+        
+    </Source>
+    
+    <Package>
+        <Name>dracut</Name>
+        <Files>
+            <Path fileType="config">/etc</Path>
+            <Path fileType="executable">/usr/bin</Path>
+            <Path fileType="data">/usr/lib</Path>
+            <Path fileType="data">/usr/share/*</Path>
+            <Path fileType="man">/usr/share/man</Path>
+        </Files>
+        <RuntimeDependencies>
+            <Dependency>dash</Dependency>
+            <Dependency>systemd</Dependency>
+            <Dependency>lvm2</Dependency>
+            <Dependency>grub2</Dependency>
+            <Dependency>kernel</Dependency>
+        </RuntimeDependencies>
+        <Provides>
+            <COMAR script="package.py">System.Package</COMAR>
+            <COMAR script="packageHandler.py">System.PackageHandler</COMAR>
+        </Provides>
+    </Package>
+    
+    <History>
+        
+        <Update release="1">
+            <Date>2017-02-05</Date>
+            <Version>044</Version>
+            <Comment>Add dracut to repositories</Comment>
+            <Name>Limelinux Developers</Name>
+            <Email>admin@limelinux.com</Email>
+        </Update>
+    </History>
+    
+</PISI>
+
