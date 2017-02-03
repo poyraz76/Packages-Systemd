@@ -36,6 +36,8 @@ def setup():
                          --with-crypto=nss \
                          --with-dhcpcd=/sbin/dhcpcd \
                          --with-dbus-sys-dir=/etc/dbus-1/system.d \
+                         --with-systemdsystemunitdir=/usr/lib/systemd/system\
+                         --with-session-tracking=systemd\
                          --with-dhclient=/usr/sbin/dhclient \
                          --with-kernel-firmware-dir=/lib/firmware \
                          --with-resolvconf=/etc/resolv.default.conf \
