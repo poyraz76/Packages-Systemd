@@ -10,22 +10,16 @@ from pisi.actionsapi import libtools
 from pisi.actionsapi import get
 
 def setup():
-    libtools.libtoolize("--force --copy")
-    autotools.autoreconf("-fi")
-
-    autotools.configure("--localstatedir=/var \
-                         --enable-bash-completion \
-                         --disable-doxygen-docs \
-                         --disable-gtk-doc \
-                         --disable-static")
-
+	autotools.configure ("--prefix=/usr \
+            --sysconfdir=/etc \
+            --localstatedir=/var \
+            --libexecdir=/usr/lib/dbus-1.0 \
+            --with-console-auth-dir=/run/console/\
+            --with-systemdsystemunitdir=/usr/lib/systemd/system\
+            --disable-static")
+						
 def build():
-    autotools.make()
-
-
+	autotools.make ()
+	
 def install():
-    autotools.rawInstall("DESTDIR=%s" % get.installDIR())
-
-    pisitools.removeDir("/usr/share/gtk-doc")
-
-    pisitools.dodoc("AUTHORS", "ChangeLog", "HACKING", "NEWS", "README")
+	autotools.rawInstall ("DESTDIR=%s" % get.installDIR())

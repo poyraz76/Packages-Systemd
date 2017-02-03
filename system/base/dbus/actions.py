@@ -18,6 +18,7 @@ def setup():
                         --with-system-pid-file=/run/dbus/pid \
                         --with-system-socket=/run/dbus/system_bus_socket \
                         --with-console-auth-dir=/run/console/ \
+                        --with-systemdsystemunitdir=/usr/lib/systemd/system\
                         --enable-inotify \
                         --disable-dnotify \
                         --disable-verbose-mode \
