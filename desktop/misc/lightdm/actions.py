@@ -6,6 +6,7 @@
 from pisi.actionsapi import autotools
 from pisi.actionsapi import get
 from pisi.actionsapi import shelltools
+from pisi.actionsapi import pisitools
 
 def setup():
   #  shelltools.export("MOC5", "moc-qt5")
