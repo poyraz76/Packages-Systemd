@@ -12438,6 +12438,48 @@
     </SpecFile>
     <SpecFile>
         <Source>
+            <Name>gfxtheme-limelinux-install</Name>
+            <Homepage>www.limelinux.com</Homepage>
+            <Packager>
+                <Name>Lime GNU/LINUX Community</Name>
+                <Email>admin@limelinux.com</Email>
+            </Packager>
+            <ExcludeArch>armv7h</ExcludeArch>
+            <License>GPLv2</License>
+            <IsA>data</IsA>
+            <PartOf>system.boot</PartOf>
+            <Summary xml:lang="en">Pisi Linux gfxboot install theme</Summary>
+            <Summary xml:lang="tr">Pisi Linux gfxboot teması</Summary>
+            <Description xml:lang="en">Gfxtheme install package for Pisi Linux</Description>
+            <Description xml:lang="tr">Kurulum sistemi ve kurulu sistem için Pisi Linux gfxboot teması.</Description>
+            <Archive type="tarxz" sha1sum="e7ba6a4f7afd9a271ba8ce6d1cb980d7d2e265e4">http://source.limelinux.com/1.0/gfxtheme-limelinux-install-0.2.tar.xz</Archive>
+            <BuildDependencies>
+                <Dependency>gfxboot</Dependency>
+                <Dependency>fribidi</Dependency>
+            </BuildDependencies>
+            <Patches>
+                <Patch>chmod-t.patch</Patch>
+            </Patches>
+            <SourceURI>system/boot/gfxtheme-pisilinux-install/pspec.xml</SourceURI>
+        </Source>
+        <Package>
+            <Name>gfxtheme-limelinux-install</Name>
+            <Files>
+                <Path fileType="data">/usr/share/gfxtheme/limelinux/install</Path>
+            </Files>
+        </Package>
+        <History>
+            <Update release="1">
+                <Date>2016-12-21</Date>
+                <Version>0.2</Version>
+                <Comment>First Release</Comment>
+                <Name>Lime GNU/LINUX Community</Name>
+                <Email>admin@limelinux.com</Email>
+            </Update>
+        </History>
+    </SpecFile>
+    <SpecFile>
+        <Source>
             <Name>gfxboot</Name>
             <Homepage>https://github.com/openSUSE/gfxboot</Homepage>
             <Packager>
@@ -12683,8 +12725,14 @@
             <Name>plymouth</Name>
             <RuntimeDependencies>
                 <Dependency>libdrm</Dependency>
-                <Dependency>plymouth-core-libs</Dependency>
-                <Dependency>plymouth-theme-limelinux</Dependency>
+                <Dependency>cairo</Dependency>
+                <Dependency>gtk2</Dependency>
+                <Dependency>atk</Dependency>
+                <Dependency>cairo</Dependency>
+                <Dependency>pango</Dependency>
+                <Dependency>gdk-pixbuf</Dependency>
+                <Dependency>fontconfig</Dependency>
+                <Dependency>libpng</Dependency>
             </RuntimeDependencies>
             <Files>
                 <Path fileType="executable">/bin</Path>
@@ -12711,6 +12759,24 @@
                 <Path fileType="header">/usr/include</Path>
                 <Path fileType="data">/usr/lib/pkgconfig</Path>
                 <Path fileType="config">/usr/lib/tmpfiles.d/plymouth.conf</Path>
+                <Path fileType="library">/lib/libply-splash-core.so*</Path>
+                <Path fileType="library">/lib/libply.so*</Path>
+                <Path fileType="library">/usr/lib/plymouth/label.so</Path>
+                <Path fileType="library">/usr/lib/plymouth/fade-throbber.so</Path>
+                <Path fileType="data">/usr/share/plymouth/themes/fade-in</Path>
+                <Path fileType="library">/usr/lib/plymouth/throbgress.so</Path>
+                <Path fileType="data">/usr/share/plymouth/themes/spinfinity</Path>
+                <Path fileType="library">/usr/lib/plymouth/space-flares.so</Path>
+                <Path fileType="data">/usr/share/plymouth/themes/solar</Path>
+                <Path fileType="library">/usr/lib/plymouth/two-step.so</Path>
+                <Path fileType="data">/usr/share/plymouth/themes/charge</Path>
+                <Path fileType="library">/usr/lib/plymouth/script.so</Path>
+                <Path fileType="data">/usr/share/plymouth/themes/script</Path>
+                <Path fileType="data">/usr/share/plymouth/themes/limelinux</Path>
+                <Path fileType="library">/usr/lib/libply-splash-graphics.so*</Path>
+                <Path fileType="executable">/usr/bin/plymouth-log-viewer</Path>
+                <Path fileType="data">/usr/share/gdm/autostart/LoginWindow/plymouth-log-viewer.desktop</Path>
+                <Path fileType="data">/usr/share/plymouth/themes/spinner</Path>
             </Files>
             <Provides>
                 <COMAR script="package.py">System.Package</COMAR>
@@ -12722,216 +12788,6 @@
                 <AdditionalFile target="/usr/share/pixmaps/plymouth-limelinux.png" permission="0644" owner="root">limelinux/images/white-head.png</AdditionalFile>
                 <AdditionalFile target="/usr/share/plymouth/themes/charge/charge.plymouth" permission="0644" owner="root">fedora/charge.plymouth</AdditionalFile>
             </AdditionalFiles>
-        </Package>
-        <Package>
-            <Name>plymouth-core-libs</Name>
-            <Summary xml:lang="en">Plymouth core libraries</Summary>
-            <Description xml:lang="en">plymouth-core-libs contains the libply and libply-splash-core libraries used by Plymouth.</Description>
-            <Files>
-                <Path fileType="library">/lib/libply-splash-core.so*</Path>
-                <Path fileType="library">/lib/libply.so*</Path>
-            </Files>
-        </Package>
-        <Package>
-            <Name>plymouth-graphics-libs</Name>
-            <Summary xml:lang="en">Plymouth graphics libraries</Summary>
-            <Description xml:lang="en">plymouth-graphics-libs contains the libply-splash-graphics library used by graphics Plymouth splashes.</Description>
-            <RuntimeDependencies>
-                <Dependency release="1">plymouth-core-libs</Dependency>
-                <Dependency>libpng</Dependency>
-            </RuntimeDependencies>
-            <Files>
-                <Path fileType="library">/usr/lib/libply-splash-graphics.so*</Path>
-            </Files>
-        </Package>
-        <Package>
-            <Name>plymouth-renderer-x11</Name>
-            <Summary xml:lang="en">An X11 renderer for debugging purposes</Summary>
-            <RuntimeDependencies>
-                <Dependency release="1">plymouth-core-libs</Dependency>
-                <Dependency>cairo</Dependency>
-                <Dependency>gtk2</Dependency>
-                <Dependency>atk</Dependency>
-                <Dependency>cairo</Dependency>
-                <Dependency>pango</Dependency>
-                <Dependency>gdk-pixbuf</Dependency>
-                <Dependency>fontconfig</Dependency>
-            </RuntimeDependencies>
-            <Files>
-                <Path fileType="library">/usr/lib/plymouth/renderers/x11*</Path>
-            </Files>
-        </Package>
-        <Package>
-            <Name>plymouth-utils</Name>
-            <Summary xml:lang="en">Plymouth related utilities</Summary>
-            <Description xml:lang="en">plymouth-utils contains utilities that integrate with Plymouth including a boot log viewing application.</Description>
-            <RuntimeDependencies>
-                <Dependency>pango</Dependency>
-                <Dependency>gtk2</Dependency>
-            </RuntimeDependencies>
-            <Files>
-                <Path fileType="executable">/usr/bin/plymouth-log-viewer</Path>
-                <Path fileType="data">/usr/share/gdm/autostart/LoginWindow/plymouth-log-viewer.desktop</Path>
-            </Files>
-        </Package>
-        <Package>
-            <Name>plymouth-plugin-label</Name>
-            <Summary xml:lang="en">Plymouth label plugin</Summary>
-            <Description xml:lang="en">plymouth-plugin-label contains the label control plugin for Plymouth. It provides the ability to render text on graphical boot splashes using pango and cairo.</Description>
-            <RuntimeDependencies>
-                <Dependency>cairo</Dependency>
-                <Dependency>pango</Dependency>
-                <Dependency release="1">plymouth-core-libs</Dependency>
-                <Dependency release="1">plymouth-graphics-libs</Dependency>
-            </RuntimeDependencies>
-            <Files>
-                <Path fileType="library">/usr/lib/plymouth/label.so</Path>
-            </Files>
-        </Package>
-        <Package>
-            <Name>plymouth-plugin-fade-throbber</Name>
-            <Summary xml:lang="en">Plymouth Fade-Throbber plugin</Summary>
-            <Description xml:lang="en">plymouth-plugin-fade-throbber contains the &quot;Fade-In&quot; boot splash plugin for Plymouth. It features a centered image that fades in and out while other images pulsate around during system boot up.</Description>
-            <RuntimeDependencies>
-                <Dependency release="1">plymouth-graphics-libs</Dependency>
-                <Dependency release="1">plymouth-core-libs</Dependency>
-            </RuntimeDependencies>
-            <Files>
-                <Path fileType="library">/usr/lib/plymouth/fade-throbber.so</Path>
-            </Files>
-        </Package>
-        <Package>
-            <Name>plymouth-theme-spinner</Name>
-            <Summary xml:lang="en">Spinner theme for Plymouth</Summary>
-            <Summary xml:lang="tr">plymouth için Spinner teması</Summary>
-            <Description xml:lang="en">plymouth-theme-spinner contains the &quot;Spinner&quot; boot splash theme for Plymouth. It features a simple theme with a small spinner on a dark background.</Description>
-            <RuntimeDependencies>
-                <Dependency release="1">plymouth-plugin-two-step</Dependency>
-            </RuntimeDependencies>
-            <Files>
-                <Path fileType="data">/usr/share/plymouth/themes/spinner</Path>
-            </Files>
-        </Package>
-        <Package>
-            <Name>plymouth-theme-fade-in</Name>
-            <Summary xml:lang="en">Fade-in theme for Plymouth</Summary>
-            <Description xml:lang="en">plymouth-theme-fade-in contains the &quot;Fade-In&quot; boot splash theme for Plymouth. It features a centered logo that fades in and out while stars twinkle around the logo during system boot up.</Description>
-            <RuntimeDependencies>
-                <Dependency release="1">plymouth-plugin-fade-throbber</Dependency>
-            </RuntimeDependencies>
-            <Files>
-                <Path fileType="data">/usr/share/plymouth/themes/fade-in</Path>
-            </Files>
-        </Package>
-        <Package>
-            <Name>plymouth-plugin-throbgress</Name>
-            <Summary xml:lang="en">Plymouth Throbgress plugin</Summary>
-            <Description xml:lang="en">plymouth-plugin-throbgress contains the &quot;throbgress&quot; boot splash plugin for Plymouth. It features a centered logo and animated spinner that spins repeatedly while a progress bar advances at the bottom of the screen.</Description>
-            <RuntimeDependencies>
-                <Dependency release="1">plymouth-plugin-label</Dependency>
-                <Dependency release="1">plymouth-graphics-libs</Dependency>
-                <Dependency release="1">plymouth-core-libs</Dependency>
-            </RuntimeDependencies>
-            <Files>
-                <Path fileType="library">/usr/lib/plymouth/throbgress.so</Path>
-            </Files>
-        </Package>
-        <Package>
-            <Name>plymouth-theme-spinfinity</Name>
-            <Summary xml:lang="en">Plymouth Spinfinity theme</Summary>
-            <Summary xml:lang="tr">plymouth için Spinfinity teması</Summary>
-            <Description xml:lang="en">plymouth-theme-spinfinity contains the &quot;Spinfinity&quot; boot splash theme for Plymouth. It features a centered logo and animated spinner that spins in the shape of an infinity sign.</Description>
-            <RuntimeDependencies>
-                <Dependency release="1">plymouth-plugin-throbgress</Dependency>
-            </RuntimeDependencies>
-            <Files>
-                <Path fileType="data">/usr/share/plymouth/themes/spinfinity</Path>
-            </Files>
-        </Package>
-        <Package>
-            <Name>plymouth-plugin-space-flares</Name>
-            <Summary xml:lang="en">Plymouth space-flares plugin</Summary>
-            <Description xml:lang="en">plymouth-plugin-space-flares contains the &quot;space-flares&quot; boot splash plugin for Plymouth. It features a corner image with animated flares.</Description>
-            <RuntimeDependencies>
-                <Dependency release="1">plymouth-plugin-label</Dependency>
-                <Dependency release="1">plymouth-graphics-libs</Dependency>
-                <Dependency release="1">plymouth-core-libs</Dependency>
-            </RuntimeDependencies>
-            <Files>
-                <Path fileType="library">/usr/lib/plymouth/space-flares.so</Path>
-            </Files>
-        </Package>
-        <Package>
-            <Name>plymouth-theme-solar</Name>
-            <Summary xml:lang="en">Plymouth Solar theme</Summary>
-            <Summary xml:lang="tr">plymouth için Solar teması</Summary>
-            <Description xml:lang="en">plymouth-theme-solar contains the &quot;Solar&quot; boot splash theme for Plymouth. It features a blue flamed sun with animated solar flares.</Description>
-            <RuntimeDependencies>
-                <Dependency release="1">plymouth-plugin-space-flares</Dependency>
-            </RuntimeDependencies>
-            <Files>
-                <Path fileType="data">/usr/share/plymouth/themes/solar</Path>
-            </Files>
-        </Package>
-        <Package>
-            <Name>plymouth-plugin-two-step</Name>
-            <Summary xml:lang="en">Plymouth Two-Step plugin</Summary>
-            <Description xml:lang="en">plymouth-plugin-two-step contains the &quot;two-step&quot; boot splash plugin for Plymouth. It features a two phased boot process that starts with a progressing animation synced to boot time and finishes with a short, fast one-shot animation.</Description>
-            <RuntimeDependencies>
-                <Dependency release="1">plymouth-plugin-label</Dependency>
-                <Dependency release="1">plymouth-graphics-libs</Dependency>
-                <Dependency release="1">plymouth-core-libs</Dependency>
-            </RuntimeDependencies>
-            <Files>
-                <Path fileType="library">/usr/lib/plymouth/two-step.so</Path>
-            </Files>
-        </Package>
-        <Package>
-            <Name>plymouth-theme-charge</Name>
-            <Summary xml:lang="en">Plymouth Charge plugin</Summary>
-            <Summary xml:lang="tr">plymouth için Charge teması</Summary>
-            <Description xml:lang="en">plymouth-theme-charge This package contains the &quot;charge&quot; boot splash theme for Plymouth. It features the shadowy hull of a Fedora logo charge up and and finally burst into full form.</Description>
-            <RuntimeDependencies>
-                <Dependency release="1">plymouth-plugin-two-step</Dependency>
-            </RuntimeDependencies>
-            <Files>
-                <Path fileType="data">/usr/share/plymouth/themes/charge</Path>
-            </Files>
-        </Package>
-        <Package>
-            <Name>plymouth-plugin-script</Name>
-            <Summary xml:lang="en">Plymouth script plugin</Summary>
-            <Description xml:lang="en">plymouth-plugin-script contains &quot;script&quot; boot splash plugin for Plymouth. It features an extensible, scriptable boot splash language that simplifies the process of designing custom boot splash themes.</Description>
-            <RuntimeDependencies>
-                <Dependency release="1">plymouth-graphics-libs</Dependency>
-                <Dependency release="1">plymouth-core-libs</Dependency>
-            </RuntimeDependencies>
-            <Files>
-                <Path fileType="library">/usr/lib/plymouth/script.so</Path>
-            </Files>
-        </Package>
-        <Package>
-            <Name>plymouth-theme-script</Name>
-            <Summary xml:lang="en">Plymouth Script theme</Summary>
-            <Description xml:lang="en">plymouth-theme-script contains the &quot;script&quot; boot splash theme for Plymouth. It it is a simple example theme the uses the &quot;script&quot; plugin.</Description>
-            <RuntimeDependencies>
-                <Dependency release="1">plymouth-plugin-script</Dependency>
-            </RuntimeDependencies>
-            <Files>
-                <Path fileType="data">/usr/share/plymouth/themes/script</Path>
-            </Files>
-        </Package>
-        <Package>
-            <Name>plymouth-theme-limelinux</Name>
-            <Summary xml:lang="en">Plymouth Lime Linux theme</Summary>
-            <Summary xml:lang="tr">plymouth için Lime Linux teması</Summary>
-            <Description xml:lang="en">plymouth-theme-limelinux contains a simple but elegant boot theme for Lime Linux.</Description>
-            <RuntimeDependencies>
-                <Dependency release="1">plymouth-plugin-script</Dependency>
-            </RuntimeDependencies>
-            <Files>
-                <Path fileType="data">/usr/share/plymouth/themes/limelinux</Path>
-            </Files>
         </Package>
         <History>
             <Update release="1">
@@ -14271,7 +14127,7 @@
             <PartOf>system.base</PartOf>
             <Summary xml:lang="en">A tool to display dialog boxes from shell scripts</Summary>
             <Description xml:lang="en">A tool to display dialog boxes from shell scripts</Description>
-            <Archive type="targz" sha1sum="6745a288bc49d2b2f8a92411086387c357d880d0">ftp://invisible-island.net/dialog/dialog.tar.gz</Archive>
+            <Archive type="targz" sha1sum="6c3282f6b8ef9e942c5a169ff93fb14ad80bddc4">ftp://invisible-island.net/dialog/dialog.tar.gz</Archive>
             <SourceURI>system/base/dialog/pspec.xml</SourceURI>
         </Source>
         <Package>
@@ -15427,7 +15283,7 @@
             <PartOf>system.base</PartOf>
             <Summary xml:lang="en">POSIX compliant shell</Summary>
             <Description xml:lang="en">Dash is a POSIX compliant shell. It can be installed as /bin/sh or as the default shell for either root or a second user with a userid of 0. It depends on fewer libraries than the Bash shell and is therefore less likely to be affected by an upgrade problem or disk failure. Dash is also useful for checking that a script is completely compatible with POSIX syntax.</Description>
-            <Archive type="targz" sha1sum="a3ebc16f2e2c7ae8adf64e5e62ae3dcb631717c6">http://pkgs.fedoraproject.org/repo/pkgs/dash/dash-0.5.7.tar.gz/f6cedb10ae7258adb5ab17a10ae80d51/dash-0.5.7.tar.gz</Archive>
+            <Archive type="targz" sha1sum="b9e9fbf21d95b5317f6e876fe7086a8fe69b3806">http://source.limelinux.com/1.0/dash-0.5.9.tar.gz</Archive>
             <SourceURI>system/base/dash/pspec.xml</SourceURI>
         </Source>
         <Package>
@@ -15483,6 +15339,58 @@
             <Update release="1">
                 <Date>2016-12-21</Date>
                 <Version>3.3</Version>
+                <Comment>First Release</Comment>
+                <Name>Lime GNU/LINUX Community</Name>
+                <Email>admin@limelinux.com</Email>
+            </Update>
+        </History>
+    </SpecFile>
+    <SpecFile>
+        <Source>
+            <Name>openrc</Name>
+            <Homepage>http://www.gentoo.org/proj/en/base/openrc/</Homepage>
+            <Packager>
+                <Name>Lime GNU/LINUX Community</Name>
+                <Email>admin@limelinux.com</Email>
+            </Packager>
+            <License>BSD</License>
+            <IsA>app:console</IsA>
+            <IsA>library</IsA>
+            <PartOf>system.base</PartOf>
+            <Summary xml:lang="en">Dependency based init system that works with sysvinit.</Summary>
+            <Description xml:lang="en">Dependency based init system that works with sysvinit.</Description>
+            <Archive type="targz" sha1sum="9d2c8436ae4c8d90bcf48d4f17d58b34b9ed51a9">https://github.com/OpenRC/openrc/archive/0.22.2.tar.gz</Archive>
+            <BuildDependencies>
+                <Dependency>zlib</Dependency>
+                <Dependency>pam</Dependency>
+                <Dependency>perl</Dependency>
+                <Dependency>ncurses</Dependency>
+            </BuildDependencies>
+            <Patches>
+                <Patch level="1">lock.patch</Patch>
+            </Patches>
+            <SourceURI>system/base/openrc/pspec.xml</SourceURI>
+        </Source>
+        <Package>
+            <Name>openrc</Name>
+            <RuntimeDependencies>
+                <Dependency>zlib</Dependency>
+                <Dependency>ncurses</Dependency>
+            </RuntimeDependencies>
+            <Files>
+                <Path fileType="config">/etc</Path>
+                <Path fileType="executable">/usr/bin</Path>
+                <Path fileType="executable">/sbin</Path>
+                <Path fileType="library">/usr/lib</Path>
+                <Path fileType="doc">/usr/share/doc</Path>
+                <Path fileType="header">/usr/include</Path>
+                <Path fileType="man">/usr/share/man</Path>
+            </Files>
+        </Package>
+        <History>
+            <Update release="1">
+                <Date>2016-12-21</Date>
+                <Version>0.22.2</Version>
                 <Comment>First Release</Comment>
                 <Name>Lime GNU/LINUX Community</Name>
                 <Email>admin@limelinux.com</Email>
@@ -17149,6 +17057,52 @@
     </SpecFile>
     <SpecFile>
         <Source>
+            <Name>openrc-services</Name>
+            <Homepage>https://github.com/jcnelson/vdev.git</Homepage>
+            <Packager>
+                <Name>Lime GNU/LINUX Community</Name>
+                <Email>admin@limelinux.com</Email>
+            </Packager>
+            <License>GPLv2</License>
+            <IsA>console</IsA>
+            <PartOf>system.base</PartOf>
+            <Summary xml:lang="en">Pisi GNU/ Linux service scripts for openrc</Summary>
+            <Description xml:lang="en">Pisi GNU/ Linux service scripts for openrc</Description>
+            <Archive type="targz" sha1sum="1b32c82b583c36054a43942c989057b965b48783">https://github.com/LimeLinux/openrc-services/archive/v1.0.tar.gz</Archive>
+            <BuildDependencies>
+                <Dependency>openrc</Dependency>
+            </BuildDependencies>
+            <SourceURI>system/base/openrc-services/pspec.xml</SourceURI>
+        </Source>
+        <Package>
+            <Name>openrc-services</Name>
+            <RuntimeDependencies>
+                <Dependency>openrc</Dependency>
+            </RuntimeDependencies>
+            <Files>
+                <Path fileType="executable">/bin</Path>
+                <Path fileType="executable">/sbin</Path>
+                <Path fileType="executable">/usr/bin</Path>
+                <Path fileType="executable">/usr/sbin</Path>
+                <Path fileType="executable">/lib/udev</Path>
+                <Path fileType="library">/usr/lib</Path>
+                <Path fileType="config">/etc</Path>
+                <Path fileType="data">/usr/share</Path>
+                <Path fileType="header">/usr/include/</Path>
+            </Files>
+        </Package>
+        <History>
+            <Update release="1">
+                <Date>2016-12-21</Date>
+                <Version>1.0</Version>
+                <Comment>First Release</Comment>
+                <Name>Lime GNU/LINUX Community</Name>
+                <Email>admin@limelinux.com</Email>
+            </Update>
+        </History>
+    </SpecFile>
+    <SpecFile>
+        <Source>
             <Name>help2man</Name>
             <Homepage>http://www.gnu.org/software/help2man</Homepage>
             <Packager>
@@ -17309,7 +17263,7 @@
             <Summary xml:lang="tr">Standart dosya, metin ve kabuk uygulamaları</Summary>
             <Description xml:lang="en">Utilitaires standards GNU pour fichiers (chmod, cp, dd, dir, ls...), utilitaires texte (sort, tr, head, wc...) et utilitaires d&apos;interpréteur de commande (shell) (whoami, who...)</Description>
             <Description xml:lang="tr">GNU dosya uygulamaları (chmod, cp, dd, dir, ls...), sh uygulamaları (whoami, who,...) ve metin uygulamalarının (sort, tr, head, wc..) birlikteliğinden oluşmaktadır.</Description>
-            <Archive type="tarxz" sha1sum="301f186c24afb882a3ca73d19a102a2ce6f456c3">http://ftp.gnu.org/gnu/coreutils/coreutils-8.25.tar.xz</Archive>
+            <Archive type="tarxz" sha1sum="d6268b2495c52d7a0ecc6156e36e0eca16e601ea">http://ftp.gnu.org/gnu/coreutils/coreutils-8.26.tar.xz</Archive>
             <BuildDependencies>
                 <Dependency>acl</Dependency>
                 <Dependency>attr</Dependency>
@@ -17321,38 +17275,20 @@
                 <Dependency>texinfo</Dependency>
             </BuildDependencies>
             <Patches>
-                <Patch level="0">remove_am_silent_rules.patch</Patch>
+                <Patch level="1">coreutils-8.26-i18n-1.patch</Patch>
             </Patches>
             <SourceURI>system/base/coreutils/pspec.xml</SourceURI>
         </Source>
         <Package>
             <Name>coreutils</Name>
-            <RuntimeDependencies>
-                <Dependency>acl</Dependency>
-                <Dependency>attr</Dependency>
-                <Dependency>gmp</Dependency>
-                <Dependency>libcap</Dependency>
-            </RuntimeDependencies>
             <Files>
-                <Path fileType="executable">/bin</Path>
-                <Path fileType="executable">/usr/sbin</Path>
-                <Path fileType="config">/etc</Path>
-                <Path fileType="executable">/usr/bin</Path>
-                <Path fileType="executable">/usr/libexec</Path>
-                <Path fileType="library">/usr/lib</Path>
-                <Path fileType="doc">/usr/share/doc</Path>
-                <Path fileType="man">/usr/share/man</Path>
-                <Path fileType="info">/usr/share/info</Path>
-                <Path fileType="localedata">/usr/share/locale</Path>
+                <Path fileType="*">/</Path>
             </Files>
-            <AdditionalFiles>
-                <AdditionalFile target="/usr/sbin/adduser" permission="0755" owner="root">adduser</AdditionalFile>
-            </AdditionalFiles>
         </Package>
         <History>
             <Update release="1">
                 <Date>2016-12-21</Date>
-                <Version>8.25</Version>
+                <Version>8.26</Version>
                 <Comment>First Release</Comment>
                 <Name>Lime GNU/LINUX Community</Name>
                 <Email>admin@limelinux.com</Email>
@@ -32716,7 +32652,7 @@
             <Description xml:lang="en">lsof is a Unix-specific diagnostic tool. Its name stands for LiSt Open Files, and it does just that. It lists information about any files that are open by processes currently running on the system. It can also list communications open by each process.</Description>
             <Description xml:lang="tr">lsof sistemde çalışmakta olan UNIX süreçleri tarafından açılmış dosyaları listeleyen kullanışlı bir araçtır.</Description>
             <Description xml:lang="es">Lsof es una herramienta de diagnostica específica de Unix. Su nombre quiere decir LiSt Open files (listar archivos abiertos), y hace justamente esto. Genera una lista con información sobre cada archivo abierto por procesos que están activos en el sistema. También puede listar comunicaciones abiertas por cada proceso.</Description>
-            <Archive type="tar" sha1sum="6e5f875863091db32212324f669f110e2365b617">http://source.limelinux.com/1.0/lsof_4.84_src.tar</Archive>
+            <Archive type="tarxz" sha1sum="0fdde90cba7b1c90e7b10ee22f0c6234c5eb9c70">http://source.limelinux.com/1.0/lsof_4.89_src.tar.xz</Archive>
             <SourceURI>util/misc/lsof/pspec.xml</SourceURI>
         </Source>
         <Package>
@@ -32731,7 +32667,7 @@
         <History>
             <Update release="1">
                 <Date>2016-12-21</Date>
-                <Version>4.84</Version>
+                <Version>4.89</Version>
                 <Comment>First Release</Comment>
                 <Name>Lime GNU/LINUX Community</Name>
                 <Email>admin@limelinux.com</Email>
@@ -34421,42 +34357,6 @@
                 <Date>2016-12-21</Date>
                 <Version>2.1</Version>
                 <Comment>First Release</Comment>
-                <Name>Lime GNU/LINUX Community</Name>
-                <Email>admin@limelinux.com</Email>
-            </Update>
-        </History>
-    </SpecFile>
-    <SpecFile>
-        <Source>
-            <Name>dash</Name>
-            <Homepage>http://gondor.apana.org.au/~herbert/dash/</Homepage>
-            <Packager>
-                <Name>Lime GNU/LINUX Community</Name>
-                <Email>admin@limelinux.com</Email>
-            </Packager>
-            <License>BSD</License>
-            <IsA>app:console</IsA>
-            <PartOf>util.shell</PartOf>
-            <Summary xml:lang="en">Small and fast POSIX-compliant shell</Summary>
-            <Summary xml:lang="tr">Ufak ve hızlı POSIX uyumlu kabuk</Summary>
-            <Description xml:lang="en">DASH is a POSIX-compliant implementation of /bin/sh that aims to be as small as possible.</Description>
-            <Description xml:lang="tr">DASH, POSIX uyumlu bir /bin/sh gerçeklemesi olup, olabildiğince ufak olmayı hedefleyen bir kabuktur.</Description>
-            <Archive type="targz" sha1sum="cd058935bba545427caa375337afe8a6309477d2">http://gondor.apana.org.au/~herbert/dash/files/dash-0.5.8.tar.gz</Archive>
-            <SourceURI>util/shell/dash/pspec.xml</SourceURI>
-        </Source>
-        <Package>
-            <Name>dash</Name>
-            <Files>
-                <Path fileType="executable">/bin/dash</Path>
-                <Path fileType="man">/usr/share/man</Path>
-                <Path fileType="doc">/usr/share/doc</Path>
-            </Files>
-        </Package>
-        <History>
-            <Update release="1">
-                <Date>2016-06-08</Date>
-                <Version>0.5.8</Version>
-                <Comment>First release</Comment>
                 <Name>Lime GNU/LINUX Community</Name>
                 <Email>admin@limelinux.com</Email>
             </Update>
@@ -55545,59 +55445,6 @@ uses SIMD instructions (MMX, SSE2, etc.) to accelerate baseline JPEG compression
             </Update>
         </History>
     </SpecFile>
-    <Package>
-        <Name>systemd</Name>
-        <Summary xml:lang="en">A System and Session Manager</Summary>
-        <Summary xml:lang="tr">Sistem ve Oturum Yöneticisi</Summary>
-        <Description xml:lang="en">systemd is a system and session manager for Linux, compatible with SysV and LSB init scripts.</Description>
-        <Description xml:lang="tr">systemd SysV ve LSB başlangıç betikleriyle uyumlu bir Linux sistem ve oturum yöneticisidir.</Description>
-        <IsA>app:console</IsA>
-        <IsA>service</IsA>
-        <PartOf>system.base</PartOf>
-        <License>GPLv2+</License>
-        <RuntimeDependencies>
-            <Dependency>pam</Dependency>
-            <Dependency>dbus</Dependency>
-            <Dependency>libcap</Dependency>
-            <Dependency>eudev</Dependency>
-            <Dependency>util-linux</Dependency>
-            <Dependency>tcp-wrappers</Dependency>
-            <Dependency>cryptsetup</Dependency>
-            <Dependency>gawk</Dependency>
-            <Dependency>coreutils</Dependency>
-        </RuntimeDependencies>
-        <Provides>
-            <COMAR script="packageHandler.py">System.PackageHandler</COMAR>
-            <COMAR script="system-package-units.py">System.Package</COMAR>
-        </Provides>
-        <History>
-            <Update release="1">
-                <Date>2011-08-25</Date>
-                <Version>218</Version>
-                <Comment>New Packages</Comment>
-                <Name>Ergün Salman</Name>
-                <Email>poyraz76@limelinux.com</Email>
-            </Update>
-        </History>
-        <BuildHost>buildfarm</BuildHost>
-        <Distribution>LimeLinux</Distribution>
-        <DistributionRelease>1.0</DistributionRelease>
-        <Architecture>x86_64</Architecture>
-        <InstalledSize>25587315</InstalledSize>
-        <PackageSize>3611382</PackageSize>
-        <PackageHash>5e4d8233a2a8843cc989baadab060edeac91d2dd</PackageHash>
-        <InstallTarHash>a72bb24be0069e025f5a3ae7a968302bd02fb7d9</InstallTarHash>
-        <PackageURI>system/base/systemd/systemd-218-1-lm-x86_64.pisi</PackageURI>
-        <PackageFormat>1.2</PackageFormat>
-        <Source>
-            <Name>systemd</Name>
-            <Homepage>http://www.freedesktop.org/wiki/Software/systemd</Homepage>
-            <Packager>
-                <Name>Ergün Salman</Name>
-                <Email>poyraz76@limelinux.com</Email>
-            </Packager>
-        </Source>
-    </Package>
     <Component>
         <Name>system</Name>
         <LocalName xml:lang="en">FIXME</LocalName>
